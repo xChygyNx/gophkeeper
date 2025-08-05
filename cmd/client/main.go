@@ -48,8 +48,6 @@ func InterceptorLogger(l logrus.FieldLogger) logging.Logger {
 // @Description GophKeeper is a client-server system that allows the user to safely and securely store logins, passwords, binary data and other private information.
 // @Version 1.0
 
-// @Contact.email pavel@utkin-pro.ru
-
 func main() {
 	logger := logrus.New()
 	ctx := context.Background()
