@@ -17,19 +17,10 @@ import (
 func (h *Handler) FileUpload(ctx context.Context, req *grpc.UploadBinaryRequest) (*grpc.UploadBinaryResponse, error) {
 	h.logger.Info("file upload")
 
-	endDateToken, err := h.token.GetEndDateToken(req.AccessToken.Token)
-	if err != nil {
-		finalError := fmt.Errorf("error in get end date of token from DB: %w", err)
-		h.logger.Error(finalError)
-		return &grpc.UploadBinaryResponse{}, status.Errorf(
-			codes.Internal, finalError.Error())
-	}
-	valid := h.token.Validate(endDateToken)
-	if !valid {
-		h.logger.Error(errors.ErrNotValidateToken)
-		return &grpc.UploadBinaryResponse{}, status.Errorf(
-			codes.Unauthenticated, errors.ErrNotValidateToken.Error(),
-		)
+	logError, statusErr := validateAccessToken(req.AccessToken.Token, h.token)
+	if statusErr != nil {
+		h.logger.Error(logError)
+		return &grpc.UploadBinaryResponse{}, statusErr
 	}
 
 	FileData := &model.FileRequest{}
