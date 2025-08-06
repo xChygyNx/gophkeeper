@@ -5,19 +5,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
 
 	"github.com/xChygyNx/gophkeeper/internal/server/api"
 	grpchandler "github.com/xChygyNx/gophkeeper/internal/server/api/grpc"
-	resthandler "github.com/xChygyNx/gophkeeper/internal/server/api/rest"
 	"github.com/xChygyNx/gophkeeper/internal/server/config"
 	"github.com/xChygyNx/gophkeeper/internal/server/database"
-	"github.com/xChygyNx/gophkeeper/internal/server/storage"
-	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/entity"
-	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/file"
-	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/token"
-	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/user"
 )
 
 // @Title Password Manager github.com/xChygyNx/gophkeeper
@@ -48,19 +41,12 @@ func main() {
 		}
 	}
 
-	userRepository := user.New(db)
-	binaryRepository := file.New(db)
-	appStorage := storage.New("/tmp")
-	entityRepository := entity.New(db)
-	tokenRepository := token.New(db)
+	repositories := config.InitRepositories(db, "/tmp")
 
-	handlerRest := resthandler.NewHandler(db, serverConfig, userRepository, tokenRepository, logger)
-	routerService := resthandler.Route(handlerRest)
-	rs := chi.NewRouter()
-	rs.Mount("/", routerService)
+	rs := config.InitHTTPRouter(db, serverConfig, repositories, logger)
 
-	handlerGrpc := grpchandler.NewHandler(db, serverConfig, userRepository, binaryRepository,
-		&appStorage, entityRepository, tokenRepository, logger)
+	handlerGrpc := grpchandler.NewHandler(db, serverConfig, repositories.UserRepo, repositories.BinaryRepo,
+		repositories.AppStorage, repositories.EntityRepo, repositories.TokenRepo, logger)
 
 	ctx, cnl := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT)
 	defer cnl()
