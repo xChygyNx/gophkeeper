@@ -4,9 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strconv"
-	"time"
-
 	"github.com/xChygyNx/gophkeeper/internal/client/consts"
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/encryption"
@@ -19,19 +16,26 @@ import (
 func (s Event) CardUpdate(name, passwordSecure, paymentSystem, number, holder, cvc, endDateCard string, token model.Token) error {
 	s.logger.Info("card update")
 
-	intCvc, err := strconv.Atoi(cvc)
+	validateData := &ValidateCardData{
+		Cvc:         cvc,
+		timeEndDate: endDateCard,
+	}
+	checker := NewCardChecker(s.logger, consts.DateFormat, validateData)
+	err := checker.RunChecks()
 	if err != nil {
-		myErr := fmt.Errorf("invalid cvc code of card: %w", err)
+		myErr := fmt.Errorf("error in validate data for create card: %w", err)
 		s.logger.Error(myErr)
 		return myErr
 	}
-	timeEndDate, err := time.Parse(consts.DateFormat, endDateCard)
-	if err != nil {
-		myErr := fmt.Errorf("invalid end time of card: %w", err)
-		s.logger.Error(myErr)
-		return myErr
+
+	card := model.Card{
+		Name:          name,
+		PaymentSystem: paymentSystem,
+		Number:        number,
+		Holder:        holder,
+		EndDate:       checker.result.endDate,
+		CVC:           checker.result.intCvc,
 	}
-	card := model.Card{PaymentSystem: paymentSystem, Number: number, Holder: holder, CVC: intCvc, EndDate: timeEndDate}
 	jsonCard, err := json.Marshal(card)
 	if err != nil {
 		myErr := fmt.Errorf("error in marshal card data: %w", err)
