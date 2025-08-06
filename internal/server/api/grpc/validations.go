@@ -18,4 +18,5 @@ func validateAccessToken(token string, tokenRepository *token.Token) (error, err
 	if !valid {
 		return errors.ErrNotValidateToken, status.Errorf(codes.Unauthenticated, errors.ErrNotValidateToken.Error())
 	}
+	return nil, nil
 }
