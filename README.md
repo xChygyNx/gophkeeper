@@ -28,7 +28,7 @@
  2) Скомпилировать исполнямый файл для  клиента `go build cmd/clietn/main.go`
  3) Открыть терминал и ввести команду `make dev-up`
  4) Запуск сервера `./cmd/server/main -g "localhost:8080" -r "localhost:8088" -d "host=localhost port=5432 user=<your_username> password=<your_password> dbname=<your_dbname> sslmode=disable" -f "./data/server_keeper"`
- 5) Запуск клиента `./cmd/clietn/main -g "localhost:8080" -f "./data/client_keeper"`
+ 5) Запуск клиента `./cmd/client/main -g "localhost:8080" -f "./data/client_keeper"`
 
  Примечание
  

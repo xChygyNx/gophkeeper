@@ -4,13 +4,11 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-
 	"github.com/sirupsen/logrus"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/api/events"
 	"github.com/xChygyNx/gophkeeper/internal/client/cmp/function"
 	"github.com/xChygyNx/gophkeeper/internal/client/cmp/tab"
-	"github.com/xChygyNx/gophkeeper/internal/client/gui_elements"
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
 	"github.com/xChygyNx/gophkeeper/internal/client/storage/labels"
 	"github.com/xChygyNx/gophkeeper/internal/client/storage/windows"
@@ -20,8 +18,8 @@ func InitGUI(log *logrus.Logger, application fyne.App, client *events.Event) {
 	window := application.NewWindow("gophkeeper")
 
 	window.Resize(fyne.NewSize(windows.WindowSwitcherWidth.Size(), windows.WindowSwitcherHeight.Size()))
-	dataTables := gui_elements.InitDataTables()
-	myIndexes := gui_elements.InitIndexes()
+	dataTables := function.InitDataTables()
+	myIndexes := function.InitIndexes()
 
 	var radioOptions = []string{labels.RadioBtnLogin, labels.RadioBtnRegistration}
 	var accessToken = model.Token{}
@@ -40,19 +38,18 @@ func InitGUI(log *logrus.Logger, application fyne.App, client *events.Event) {
 	var containerFormTextUpdate *fyne.Container
 	var containerFormCardUpdate *fyne.Container
 	//---------------------------------------------------------------------- buttons
-	myButtons := gui_elements.GetButtons(client, window, log)
+	myButtons := function.GetButtons(client, window, log)
 	//---------------------------------------------------------------------- tabs
-	var containerTabs *container.AppTabs
-	myTabs := gui_elements.GetTabs()
+	myTabs := function.GetTabs()
 	//---------------------------------------------------------------------- entries init
 	separator := widget.NewSeparator()
-	myEntries := gui_elements.InitEntries()
+	myEntries := function.InitEntries()
 	//---------------------------------------------------------------------- form validator init
 	formValidator := function.NewFormValidator(myEntries)
 	//---------------------------------------------------------------------- labels init
-	myLabels := gui_elements.InitLabels()
+	myLabels := function.InitLabels()
 	//---------------------------------------------------------------------- forms init
-	myForms := gui_elements.InitForms(myEntries)
+	myForms := function.InitForms(myEntries)
 	//---------------------------------------------------------------------- radio event
 	radioAuth := widget.NewRadioGroup(radioOptions, func(value string) {
 		log.Println("Radio set to ", value)
@@ -68,7 +65,7 @@ func InitGUI(log *logrus.Logger, application fyne.App, client *events.Event) {
 		}
 	})
 	//---------------------------------------------------------------------- buttons event
-	myButtons.InitTopSynchronizationButton(myLabels, myTabs, dataTables, containerTabs, password, accessToken)
+	myButtons.InitTopSynchronizationButton(myLabels, myTabs, dataTables, myTabs.ContainerTabs, password, accessToken)
 	myButtons.InitLoginPasswordButton(containerFormLoginPasswordCreate)
 	myButtons.InitAddTextButton(containerFormTextCreate)
 	myButtons.InitAddCardButton(containerFormCardCreate)
@@ -112,7 +109,7 @@ func InitGUI(log *logrus.Logger, application fyne.App, client *events.Event) {
 	tabText := tab.GetTabTexts(myTabs, myButtons, myLabels)
 	tabCard := tab.GetTabCards(myTabs, myButtons, myLabels)
 	tabBinary := tab.GetTabBinaries(myTabs, myButtons, myLabels)
-	containerTabs = container.NewAppTabs(tabLoginPassword, tabText, tabCard, tabBinary)
+	myTabs.ContainerTabs = container.NewAppTabs(tabLoginPassword, tabText, tabCard, tabBinary)
 	//----------------------------------------------------------------------
 	// Get selected row data
 	myTabs.TblLoginPassword.OnSelected = func(id widget.TableCellID) {
@@ -133,6 +130,7 @@ func InitGUI(log *logrus.Logger, application fyne.App, client *events.Event) {
 	}
 	//---------------------------------------------------------------------- auth event
 	myButtons.InitAuthButton(myLabels, myEntries, myTabs, dataTables, radioAuth, formValidator, accessToken, password)
+
 	//---------------------------------------------------------------------- login password event create
 	myButtons.InitLoginPasswordCreateButton(myLabels, myEntries, myForms, myTabs, dataTables, formValidator,
 		accessToken, password)

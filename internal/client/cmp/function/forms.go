@@ -1,7 +1,8 @@
-package gui_elements
+package function
 
 import (
 	"fyne.io/fyne/v2/widget"
+
 	"github.com/xChygyNx/gophkeeper/internal/client/cmp/form"
 )
 

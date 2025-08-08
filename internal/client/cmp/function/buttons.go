@@ -1,4 +1,4 @@
-package gui_elements
+package function
 
 import (
 	"fyne.io/fyne/v2"
@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/api/events"
-	"github.com/xChygyNx/gophkeeper/internal/client/cmp/function"
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/table"
 	"github.com/xChygyNx/gophkeeper/internal/client/storage/errors"
@@ -116,7 +115,7 @@ func (b *Buttons) InitAddCardButton(containerFormCardCreate *fyne.Container) {
 func (b *Buttons) InitLoginPasswordDeleteButton(myLabel *Labels, dataTables *DataTables, myIndexes *Indexes,
 	accessToken model.Token) {
 	b.ButtonLoginPasswordDelete = widget.NewButton(labels.BtnDeleteLoginPassword, func() {
-		function.HideLabelsTab(myLabel.LabelAlertLoginPassword, myLabel.LabelAlertText,
+		HideLabelsTab(myLabel.LabelAlertLoginPassword, myLabel.LabelAlertText,
 			myLabel.LabelAlertCard, myLabel.LabelAlertBinary)
 		if myIndexes.IndexTblLoginPassword > 0 && b.client.LoginPasswordDelete(myIndexes.SelectedRowTblLoginPassword, accessToken) != nil {
 			// Удаляем строку с индексом indexTblLoginPassword
@@ -133,7 +132,7 @@ func (b *Buttons) InitLoginPasswordDeleteButton(myLabel *Labels, dataTables *Dat
 func (b *Buttons) InitTextDeleteButton(myLabels *Labels, dataTables *DataTables, myIndexes *Indexes,
 	accessToken model.Token) {
 	b.ButtonTextDelete = widget.NewButton(labels.BtnDeleteText, func() {
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 			myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 		if myIndexes.IndexTblText > 0 && b.client.TextDelete(myIndexes.SelectedRowTblText, accessToken) != nil {
 			// Удаляем строку с индексом indexTblText
@@ -150,7 +149,7 @@ func (b *Buttons) InitTextDeleteButton(myLabels *Labels, dataTables *DataTables,
 func (b *Buttons) InitCardDeleteButton(myLabels *Labels, dataTables *DataTables, myIndexes *Indexes,
 	accessToken model.Token) {
 	b.ButtonCardDelete = widget.NewButton(labels.BtnDeleteCard, func() {
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 			myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 		if myIndexes.IndexTblCard > 0 && b.client.CardDelete(myIndexes.SelectedRowTblCard, accessToken) != nil {
 			// Удаляем строку с индексом indexTblCard
@@ -167,7 +166,7 @@ func (b *Buttons) InitCardDeleteButton(myLabels *Labels, dataTables *DataTables,
 func (b *Buttons) InitBinaryDeleteButton(myLabels *Labels, dataTables *DataTables, myIndexes *Indexes,
 	accessToken model.Token) {
 	b.ButtonBinaryDelete = widget.NewButton(labels.BtnDeleteBinary, func() {
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 			myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 		if myIndexes.IndexTblBinary > 0 && b.client.FileRemove(myIndexes.SelectedRowTblBinary, accessToken) != nil {
 			// Удаляем строку с индексом indexTblBinary
@@ -185,9 +184,9 @@ func (b *Buttons) InitLoginPasswordUpdateButton(myLabels *Labels, myEntries *Ent
 	containerForm *fyne.Container) {
 	b.ButtonLoginPasswordUpdate = widget.NewButton(labels.BtnUpdateLoginPassword, func() {
 		if myIndexes.IndexTblLoginPassword > 0 {
-			function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+			HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 				myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
-			function.SetLoginPasswordData(myIndexes.SelectedRowTblLoginPassword, myEntries.LoginPasswordNameEntryUpdate,
+			SetLoginPasswordData(myIndexes.SelectedRowTblLoginPassword, myEntries.LoginPasswordNameEntryUpdate,
 				myEntries.LoginPasswordDescriptionEntryUpdate, myEntries.LoginEntryUpdate, myEntries.PasswordEntryUpdate)
 			b.window.SetContent(containerForm)
 			b.window.Show()
@@ -203,9 +202,9 @@ func (b *Buttons) InitTextUpdateButton(myLabels *Labels, myEntries *Entries, myI
 	containerForm *fyne.Container) {
 	b.ButtonTextUpdate = widget.NewButton(labels.BtnUpdateText, func() {
 		if myIndexes.IndexTblText > 0 {
-			function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+			HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 				myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
-			function.SetTextData(myIndexes.SelectedRowTblText, myEntries.TextNameEntryUpdate,
+			SetTextData(myIndexes.SelectedRowTblText, myEntries.TextNameEntryUpdate,
 				myEntries.TextDescriptionEntryUpdate, myEntries.TextEntryUpdate)
 			b.window.SetContent(containerForm)
 			b.window.Show()
@@ -221,9 +220,9 @@ func (b *Buttons) InitCardUpdateButton(myLabels *Labels, myEntries *Entries, myI
 	containerForm *fyne.Container) {
 	b.ButtonCardUpdate = widget.NewButton(labels.BtnUpdateCard, func() {
 		if myIndexes.IndexTblCard > 0 {
-			function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+			HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 				myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
-			function.SetCardData(myIndexes.SelectedRowTblCard, myEntries.CardNameEntryUpdate,
+			SetCardData(myIndexes.SelectedRowTblCard, myEntries.CardNameEntryUpdate,
 				myEntries.CardDescriptionEntryUpdate, myEntries.PaymentSystemEntryUpdate, myEntries.NumberEntryUpdate,
 				myEntries.HolderEntryUpdate, myEntries.CvcEntryUpdate, myEntries.EndDateEntryUpdate)
 			b.window.SetContent(containerForm)
@@ -237,14 +236,14 @@ func (b *Buttons) InitCardUpdateButton(myLabels *Labels, myEntries *Entries, myI
 }
 
 func (b *Buttons) InitLoginPasswordFormUpdateButton(myLabels *Labels, myEntries *Entries, myIndexes *Indexes,
-	dataTables *DataTables, myForms *Forms, myTabs *Tabs, formValidator *function.FormValidator,
+	dataTables *DataTables, myForms *Forms, myTabs *Tabs, formValidator *FormValidator,
 	accessToken model.Token, password string) {
 	b.ButtonLoginPasswordFormUpdate = widget.NewButton(labels.BtnUpdate, func() {
 		myLabels.LabelAlertLoginPasswordUpdate.Show()
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard,
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard,
 			myLabels.LabelAlertBinary)
 
-		errMsg, valid := formValidator.ValidateLoginPasswordForm(function.Update)
+		errMsg, valid := formValidator.ValidateLoginPasswordForm(Update)
 		if valid {
 			err := b.client.LoginPasswordUpdate(myEntries.LoginPasswordNameEntryUpdate.Text, password,
 				myEntries.LoginEntryUpdate.Text, myEntries.PasswordEntryUpdate.Text, accessToken)
@@ -269,14 +268,14 @@ func (b *Buttons) InitLoginPasswordFormUpdateButton(myLabels *Labels, myEntries 
 }
 
 func (b *Buttons) InitTextFormUpdateButton(myLabels *Labels, myEntries *Entries, myIndexes *Indexes,
-	dataTables *DataTables, myForms *Forms, myTabs *Tabs, formValidator *function.FormValidator,
+	dataTables *DataTables, myForms *Forms, myTabs *Tabs, formValidator *FormValidator,
 	accessToken model.Token, password string) {
 	b.ButtonTextFormUpdate = widget.NewButton(labels.BtnUpdate, func() {
 		myLabels.LabelAlertTextUpdate.Show()
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 			myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 
-		errMsg, valid := formValidator.ValidateTextForm(function.Update)
+		errMsg, valid := formValidator.ValidateTextForm(Update)
 		if valid {
 			err := b.client.TextUpdate(myEntries.TextNameEntryUpdate.Text, password,
 				myEntries.TextEntryUpdate.Text, accessToken)
@@ -301,14 +300,14 @@ func (b *Buttons) InitTextFormUpdateButton(myLabels *Labels, myEntries *Entries,
 }
 
 func (b *Buttons) InitCardFormUpdateButton(myLabels *Labels, myEntries *Entries, myIndexes *Indexes,
-	dataTables *DataTables, myForms *Forms, myTabs *Tabs, formValidator *function.FormValidator,
+	dataTables *DataTables, myForms *Forms, myTabs *Tabs, formValidator *FormValidator,
 	accessToken model.Token, password string) {
 	b.ButtonCardFormUpdate = widget.NewButton(labels.BtnUpdate, func() {
 		myLabels.LabelAlertCardUpdate.Show()
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText,
 			myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 
-		errMsg, valid := formValidator.ValidateCardForm(function.Update)
+		errMsg, valid := formValidator.ValidateCardForm(Update)
 		if valid {
 			err := b.client.CardUpdate(myEntries.CardNameEntryUpdate.Text, password,
 				myEntries.PaymentSystemEntryUpdate.Text, myEntries.NumberEntryUpdate.Text,
@@ -397,15 +396,15 @@ func (b *Buttons) InitBinaryDownloadButton(myLabels *Labels, myIndexes *Indexes,
 
 func (b *Buttons) InitTopBackButton(myLabels *Labels, myEntries *Entries, myTabs *Tabs) {
 	b.ButtonTopBack = widget.NewButton(labels.BtnBack, func() {
-		function.ClearLoginPassword(myEntries.LoginPasswordNameEntryCreate, myEntries.LoginPasswordDescriptionEntryCreate,
+		ClearLoginPassword(myEntries.LoginPasswordNameEntryCreate, myEntries.LoginPasswordDescriptionEntryCreate,
 			myEntries.LoginEntryCreate, myEntries.PasswordEntryCreate)
-		function.ClearText(myEntries.TextNameEntryCreate, myEntries.TextDescriptionEntryCreate, myEntries.TextEntryCreate)
-		function.ClearCard(myEntries.CardNameEntryCreate, myEntries.CardDescriptionEntryCreate, myEntries.PaymentSystemEntryCreate,
+		ClearText(myEntries.TextNameEntryCreate, myEntries.TextDescriptionEntryCreate, myEntries.TextEntryCreate)
+		ClearCard(myEntries.CardNameEntryCreate, myEntries.CardDescriptionEntryCreate, myEntries.PaymentSystemEntryCreate,
 			myEntries.NumberEntryCreate, myEntries.HolderEntryCreate, myEntries.EndDateEntryCreate, myEntries.CvcEntryCreate)
-		function.ClearLoginPassword(myEntries.LoginPasswordNameEntryUpdate, myEntries.LoginPasswordDescriptionEntryUpdate,
+		ClearLoginPassword(myEntries.LoginPasswordNameEntryUpdate, myEntries.LoginPasswordDescriptionEntryUpdate,
 			myEntries.LoginEntryUpdate, myEntries.PasswordEntryUpdate)
-		function.ClearText(myEntries.TextNameEntryUpdate, myEntries.TextDescriptionEntryUpdate, myEntries.TextEntryUpdate)
-		function.ClearCard(myEntries.CardNameEntryUpdate, myEntries.CardDescriptionEntryUpdate, myEntries.PaymentSystemEntryUpdate,
+		ClearText(myEntries.TextNameEntryUpdate, myEntries.TextDescriptionEntryUpdate, myEntries.TextEntryUpdate)
+		ClearCard(myEntries.CardNameEntryUpdate, myEntries.CardDescriptionEntryUpdate, myEntries.PaymentSystemEntryUpdate,
 			myEntries.NumberEntryUpdate, myEntries.HolderEntryUpdate, myEntries.EndDateEntryUpdate, myEntries.CvcEntryUpdate)
 		myLabels.LabelAlertLoginPasswordCreate.Hide()
 		myLabels.LabelAlertLoginPasswordUpdate.Hide()
@@ -421,74 +420,76 @@ func (b *Buttons) InitTopBackButton(myLabels *Labels, myEntries *Entries, myTabs
 }
 
 func (b *Buttons) InitAuthButton(myLabels *Labels, myEntries *Entries, myTabs *Tabs, dataTables *DataTables,
-	radioAuth *widget.RadioGroup, formValidator *function.FormValidator, accessToken model.Token, password string) {
-	myLabels.LabelAlertAuth.Show()
-	if radioAuth.Selected == labels.RadioBtnLogin {
-		errMsg, valid := formValidator.ValidateLoginForm()
-		if valid {
-			accessToken, err := b.client.Authentication(myEntries.UsernameLoginEntry.Text, myEntries.PasswordLoginEntry.Text)
-			if err != nil {
-				myLabels.LabelAlertAuth.SetText(errors.ErrLogin)
-				b.log.Error(err)
-			} else {
-				password = myEntries.PasswordLoginEntry.Text
-				dataTables.DataTblText, dataTables.DataTblCard, dataTables.DataTblLoginPassword, dataTables.DataTblBinary, err =
-					b.client.Synchronization(password, accessToken)
+	radioAuth *widget.RadioGroup, formValidator *FormValidator, accessToken model.Token, password string) {
+	b.ButtonAuth = widget.NewButton(labels.BtnSubmit, func() {
+		myLabels.LabelAlertAuth.Show()
+		if radioAuth.Selected == labels.RadioBtnLogin {
+			errMsg, valid := formValidator.ValidateLoginForm()
+			if valid {
+				accessToken, err := b.client.Authentication(myEntries.UsernameLoginEntry.Text, myEntries.PasswordLoginEntry.Text)
 				if err != nil {
 					myLabels.LabelAlertAuth.SetText(errors.ErrLogin)
 					b.log.Error(err)
 				} else {
-					b.window.SetContent(myTabs.ContainerTabs)
-					b.window.Resize(fyne.NewSize(windows.WindowMainWidth.Size(), windows.WindowMainHeight.Size()))
-					b.window.Show()
+					password = myEntries.PasswordLoginEntry.Text
+					dataTables.DataTblText, dataTables.DataTblCard, dataTables.DataTblLoginPassword, dataTables.DataTblBinary, err =
+						b.client.Synchronization(password, accessToken)
+					if err != nil {
+						myLabels.LabelAlertAuth.SetText(errors.ErrLogin)
+						b.log.Error(err)
+					} else {
+						b.window.SetContent(myTabs.ContainerTabs)
+						b.window.Resize(fyne.NewSize(windows.WindowMainWidth.Size(), windows.WindowMainHeight.Size()))
+						b.window.Show()
+					}
 				}
-			}
-		} else {
-			myLabels.LabelAlertAuth.SetText(errMsg)
-			b.log.Error(errMsg)
-		}
-	}
-	if radioAuth.Selected == labels.RadioBtnRegistration {
-		errMsg, valid := formValidator.ValidateRegistrationForm()
-		if valid {
-			exist, err := b.client.UserExist(myEntries.UsernameRegistrationEntry.Text)
-			if err != nil {
-				myLabels.LabelAlertAuth.SetText(errors.ErrRegistration)
-				b.log.Error(err)
-			}
-			if exist {
-				myLabels.LabelAlertAuth.SetText(errors.ErrUserExist)
-				b.log.Error(errors.ErrUserExist)
 			} else {
-				accessToken, err = b.client.Registration(myEntries.UsernameRegistrationEntry.Text, myEntries.PasswordRegistrationEntry.Text)
+				myLabels.LabelAlertAuth.SetText(errMsg)
+				b.log.Error(errMsg)
+			}
+		}
+		if radioAuth.Selected == labels.RadioBtnRegistration {
+			errMsg, valid := formValidator.ValidateRegistrationForm()
+			if valid {
+				exist, err := b.client.UserExist(myEntries.UsernameRegistrationEntry.Text)
 				if err != nil {
 					myLabels.LabelAlertAuth.SetText(errors.ErrRegistration)
 					b.log.Error(err)
-				} else {
-					password = myEntries.PasswordRegistrationEntry.Text
-					b.window.SetContent(myTabs.ContainerTabs)
-					b.window.Resize(fyne.NewSize(windows.WindowMainWidth.Size(), windows.WindowMainHeight.Size()))
-					b.window.Show()
 				}
+				if exist {
+					myLabels.LabelAlertAuth.SetText(errors.ErrUserExist)
+					b.log.Error(errors.ErrUserExist)
+				} else {
+					accessToken, err = b.client.Registration(myEntries.UsernameRegistrationEntry.Text, myEntries.PasswordRegistrationEntry.Text)
+					if err != nil {
+						myLabels.LabelAlertAuth.SetText(errors.ErrRegistration)
+						b.log.Error(err)
+					} else {
+						password = myEntries.PasswordRegistrationEntry.Text
+						b.window.SetContent(myTabs.ContainerTabs)
+						b.window.Resize(fyne.NewSize(windows.WindowMainWidth.Size(), windows.WindowMainHeight.Size()))
+						b.window.Show()
+					}
+				}
+			} else {
+				myLabels.LabelAlertAuth.SetText(errMsg)
+				b.log.Error(errMsg)
 			}
-		} else {
-			myLabels.LabelAlertAuth.SetText(errMsg)
-			b.log.Error(errMsg)
 		}
-	}
+	})
 }
 
 func (b *Buttons) InitLoginPasswordCreateButton(myLabels *Labels, myEntries *Entries, myForms *Forms, myTabs *Tabs,
-	dataTables *DataTables, formValidator *function.FormValidator, accessToken model.Token, password string) {
+	dataTables *DataTables, formValidator *FormValidator, accessToken model.Token, password string) {
 	b.ButtonLoginPasswordCreate = widget.NewButton(labels.BtnAdd, func() {
 		myLabels.LabelAlertLoginPasswordCreate.Show()
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 		exist := table.SearchByColumn(dataTables.DataTblLoginPassword, 0, myEntries.LoginPasswordNameEntryCreate.Text) // search in map
 		if exist {
 			myLabels.LabelAlertLoginPassword.SetText(errors.ErrLoginPasswordExist)
 			b.log.Error(myLabels.LabelAlertLoginPassword.Text)
 		}
-		errMsg, valid := formValidator.ValidateLoginPasswordForm(function.Create)
+		errMsg, valid := formValidator.ValidateLoginPasswordForm(Create)
 		if valid {
 			err := b.client.LoginPasswordCreate(myEntries.LoginPasswordNameEntryCreate.Text,
 				myEntries.LoginPasswordDescriptionEntryCreate.Text, password,
@@ -502,7 +503,7 @@ func (b *Buttons) InitLoginPasswordCreateButton(myLabels *Labels, myEntries *Ent
 						myEntries.LoginEntryCreate.Text, myEntries.PasswordEntryCreate.Text, time.Now().Format(consts.DateAndTimeFormat),
 						time.Now().Format(consts.DateAndTimeFormat)})
 
-				function.ClearLoginPassword(myEntries.LoginPasswordNameEntryCreate, myEntries.LoginPasswordDescriptionEntryCreate,
+				ClearLoginPassword(myEntries.LoginPasswordNameEntryCreate, myEntries.LoginPasswordDescriptionEntryCreate,
 					myEntries.LoginEntryCreate, myEntries.PasswordEntryCreate)
 				b.log.Info("Логин-пароль добавлен")
 
@@ -519,16 +520,16 @@ func (b *Buttons) InitLoginPasswordCreateButton(myLabels *Labels, myEntries *Ent
 }
 
 func (b *Buttons) InitTextCreateButton(myLabels *Labels, myEntries *Entries, myForms *Forms, myTabs *Tabs,
-	dataTables *DataTables, formValidator *function.FormValidator, accessToken model.Token, password string) {
+	dataTables *DataTables, formValidator *FormValidator, accessToken model.Token, password string) {
 	b.ButtonTextCreate = widget.NewButton(labels.BtnAdd, func() {
 		myLabels.LabelAlertTextCreate.Show()
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 		exist := table.SearchByColumn(dataTables.DataTblText, 0, myEntries.TextNameEntryCreate.Text) // search in map
 		if exist {
 			myLabels.LabelAlertText.SetText(errors.ErrTextExist)
 			b.log.Error(myLabels.LabelAlertText)
 		}
-		errMsg, valid := formValidator.ValidateTextForm(function.Create)
+		errMsg, valid := formValidator.ValidateTextForm(Create)
 		if valid {
 			err := b.client.TextCreate(myEntries.TextNameEntryCreate.Text, myEntries.TextDescriptionEntryCreate.Text,
 				password, myEntries.TextEntryCreate.Text, accessToken)
@@ -540,7 +541,7 @@ func (b *Buttons) InitTextCreateButton(myLabels *Labels, myEntries *Entries, myF
 					myEntries.TextDescriptionEntryCreate.Text, myEntries.TextEntryCreate.Text,
 					time.Now().Format(consts.DateAndTimeFormat), time.Now().Format(consts.DateAndTimeFormat)})
 
-				function.ClearText(myEntries.TextNameEntryCreate, myEntries.TextDescriptionEntryCreate, myEntries.TextEntryCreate)
+				ClearText(myEntries.TextNameEntryCreate, myEntries.TextDescriptionEntryCreate, myEntries.TextEntryCreate)
 				b.log.Info("Текст добавлен")
 
 				myLabels.LabelAlertTextCreate.Hide()
@@ -556,16 +557,16 @@ func (b *Buttons) InitTextCreateButton(myLabels *Labels, myEntries *Entries, myF
 }
 
 func (b *Buttons) InitCardCreateButton(myLabels *Labels, myEntries *Entries, myForms *Forms, myTabs *Tabs,
-	dataTables *DataTables, formValidator *function.FormValidator, accessToken model.Token, password string) {
+	dataTables *DataTables, formValidator *FormValidator, accessToken model.Token, password string) {
 	b.ButtonCardCreate = widget.NewButton(labels.BtnAdd, func() {
 		myLabels.LabelAlertCardCreate.Show()
-		function.HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
+		HideLabelsTab(myLabels.LabelAlertLoginPassword, myLabels.LabelAlertText, myLabels.LabelAlertCard, myLabels.LabelAlertBinary)
 		exist := table.SearchByColumn(dataTables.DataTblCard, 0, myEntries.CardNameEntryCreate.Text) // search in map
 		if exist {
 			myLabels.LabelAlertCard.SetText(errors.ErrCardExist)
 			b.log.Print(myLabels.LabelAlertCard)
 		}
-		errMsg, valid := formValidator.ValidateCardForm(function.Create)
+		errMsg, valid := formValidator.ValidateCardForm(Create)
 		if valid {
 			err := b.client.CardCreate(myEntries.CardNameEntryCreate.Text, myEntries.CardDescriptionEntryCreate.Text, password,
 				myEntries.PaymentSystemEntryCreate.Text, myEntries.NumberEntryCreate.Text, myEntries.HolderEntryCreate.Text,
@@ -579,7 +580,7 @@ func (b *Buttons) InitCardCreateButton(myLabels *Labels, myEntries *Entries, myF
 					myEntries.CvcEntryCreate.Text, myEntries.EndDateEntryCreate.Text, time.Now().Format(consts.DateAndTimeFormat),
 					time.Now().Format(consts.DateAndTimeFormat)})
 
-				function.ClearCard(myEntries.CardNameEntryCreate, myEntries.CardDescriptionEntryCreate,
+				ClearCard(myEntries.CardNameEntryCreate, myEntries.CardDescriptionEntryCreate,
 					myEntries.PaymentSystemEntryCreate, myEntries.NumberEntryCreate, myEntries.HolderEntryCreate,
 					myEntries.EndDateEntryCreate, myEntries.CvcEntryCreate)
 				b.log.Info("Карта добавлена")

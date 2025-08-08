@@ -7,7 +7,6 @@ import (
 	"unicode/utf8"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/consts"
-	"github.com/xChygyNx/gophkeeper/internal/client/gui_elements"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/algorithm"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/encryption"
 	"github.com/xChygyNx/gophkeeper/internal/client/storage/errors"
@@ -23,11 +22,11 @@ const (
 const userNameMinLength = 6
 
 type FormValidator struct {
-	*gui_elements.Entries
+	*Entries
 	emptyValue string
 }
 
-func NewFormValidator(entries *gui_elements.Entries) *FormValidator {
+func NewFormValidator(entries *Entries) *FormValidator {
 	return &FormValidator{
 		Entries:    entries,
 		emptyValue: "",

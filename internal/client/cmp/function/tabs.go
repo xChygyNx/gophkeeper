@@ -1,15 +1,15 @@
-package gui_elements
+package function
 
 import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/xChygyNx/gophkeeper/internal/client/cmp/function"
 	"github.com/xChygyNx/gophkeeper/internal/client/storage/labels"
 )
 
 type Tabs struct {
+	ContainerTabs    *container.AppTabs
 	TblLoginPassword *widget.Table
 	TblText          *widget.Table
 	TblCard          *widget.Table
@@ -35,7 +35,7 @@ func (t *Tabs) InitLoginPasswordTable(dataTables *DataTables) {
 		func(i widget.TableCellID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(dataTables.DataTblLoginPassword[i.Row][i.Col])
 		})
-	function.SetDefaultColumnsWidthLoginPassword(t.TblLoginPassword)
+	SetDefaultColumnsWidthLoginPassword(t.TblLoginPassword)
 }
 
 func (t *Tabs) InitTextTable(dataTables *DataTables) {
@@ -49,7 +49,7 @@ func (t *Tabs) InitTextTable(dataTables *DataTables) {
 		func(i widget.TableCellID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(dataTables.DataTblText[i.Row][i.Col])
 		})
-	function.SetDefaultColumnsWidthText(t.TblText)
+	SetDefaultColumnsWidthText(t.TblText)
 }
 
 func (t *Tabs) InitCardTable(dataTables *DataTables) {
@@ -63,7 +63,7 @@ func (t *Tabs) InitCardTable(dataTables *DataTables) {
 		func(i widget.TableCellID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(dataTables.DataTblCard[i.Row][i.Col])
 		})
-	function.SetDefaultColumnsWidthCard(t.TblCard)
+	SetDefaultColumnsWidthCard(t.TblCard)
 }
 
 func (t *Tabs) InitBinaryTable(dataTables *DataTables) {
@@ -77,5 +77,5 @@ func (t *Tabs) InitBinaryTable(dataTables *DataTables) {
 		func(i widget.TableCellID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(dataTables.DataTblBinary[i.Row][i.Col])
 		})
-	function.SetDefaultColumnsWidthBinary(t.TblBinary)
+	SetDefaultColumnsWidthBinary(t.TblBinary)
 }

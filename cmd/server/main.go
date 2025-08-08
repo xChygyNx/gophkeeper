@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"github.com/xChygyNx/gophkeeper/internal/server/api/rest"
+	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories"
 	"os/signal"
 	"syscall"
 
@@ -41,9 +43,9 @@ func main() {
 		}
 	}
 
-	repositories := config.InitRepositories(db, "/tmp")
+	repositories := repositories.InitRepositories(db, "/tmp")
 
-	rs := config.InitHTTPRouter(db, serverConfig, repositories, logger)
+	rs := resthandler.InitHTTPRouter(db, serverConfig, repositories, logger)
 
 	handlerGrpc := grpchandler.NewHandler(db, serverConfig, repositories.UserRepo, repositories.BinaryRepo,
 		repositories.AppStorage, repositories.EntityRepo, repositories.TokenRepo, logger)

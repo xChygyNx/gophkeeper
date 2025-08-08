@@ -1,4 +1,4 @@
-package gui_elements
+package function
 
 type Indexes struct {
 	IndexTblLoginPassword       int

@@ -1,4 +1,4 @@
-package config
+package repositories
 
 import (
 	"github.com/xChygyNx/gophkeeper/internal/server/database"

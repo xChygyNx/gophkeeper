@@ -1,4 +1,4 @@
-package gui_elements
+package function
 
 import "github.com/xChygyNx/gophkeeper/internal/client/storage/labels"
 
