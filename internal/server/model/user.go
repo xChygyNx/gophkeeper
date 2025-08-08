@@ -29,8 +29,8 @@ type UserRequest struct {
 	Password string
 }
 
-func GetUserData(data *User) *grpc.User {
-	return &grpc.User{
+func GetUserData(data *User) grpc.User {
+	return grpc.User{
 		UserId:    data.ID,
 		Username:  data.Username,
 		CreatedAt: &data.CreatedAt,

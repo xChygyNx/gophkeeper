@@ -3,13 +3,15 @@ package tab
 import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
-	"fyne.io/fyne/v2/widget"
+
+	"github.com/xChygyNx/gophkeeper/internal/client/gui_elements"
 )
 
-func GetTabBinaries(tblBinary *widget.Table, buttonSynchronization *widget.Button, binaryAdd *widget.Button, binaryDelete *widget.Button,
-	binaryDownload *widget.Button, labelAlertBinary *widget.Label) *container.TabItem {
-	bottomContainer := container.New(layout.NewHBoxLayout(), binaryAdd, binaryDelete, binaryDownload, labelAlertBinary)
-	containerTblBinary := layout.NewBorderLayout(buttonSynchronization, bottomContainer, nil, nil)
-	boxBinary := container.New(containerTblBinary, buttonSynchronization, tblBinary, bottomContainer)
+func GetTabBinaries(myTabs *gui_elements.Tabs, myButtons *gui_elements.Buttons,
+	myLabels *gui_elements.Labels) *container.TabItem {
+	bottomContainer := container.New(layout.NewHBoxLayout(), myButtons.ButtonBinaryUpload, myButtons.ButtonBinaryDelete,
+		myButtons.ButtonBinaryDownload, myLabels.LabelAlertBinary)
+	containerTblBinary := layout.NewBorderLayout(myButtons.ButtonTopSynchronization, bottomContainer, nil, nil)
+	boxBinary := container.New(containerTblBinary, myButtons.ButtonTopSynchronization, myTabs.TblBinary, bottomContainer)
 	return container.NewTabItem("Файлы", boxBinary)
 }

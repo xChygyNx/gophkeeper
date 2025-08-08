@@ -3,13 +3,15 @@ package tab
 import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
-	"fyne.io/fyne/v2/widget"
+
+	"github.com/xChygyNx/gophkeeper/internal/client/gui_elements"
 )
 
-func GetTabLoginPassword(tblLoginPassword *widget.Table, buttonSynchronization *widget.Button, loginPasswordAdd *widget.Button,
-	loginPasswordDelete *widget.Button, loginPasswordUpdate *widget.Button, labelAlertLoginPassword *widget.Label) *container.TabItem {
-	bottomContainer := container.New(layout.NewHBoxLayout(), loginPasswordAdd, loginPasswordDelete, loginPasswordUpdate, labelAlertLoginPassword)
-	containerTblLoginPassword := layout.NewBorderLayout(buttonSynchronization, bottomContainer, nil, nil)
-	boxLoginPassword := container.New(containerTblLoginPassword, buttonSynchronization, tblLoginPassword, bottomContainer)
+func GetTabLoginPassword(myTabs *gui_elements.Tabs, myButtons *gui_elements.Buttons,
+	myLabels *gui_elements.Labels) *container.TabItem {
+	bottomContainer := container.New(layout.NewHBoxLayout(), myButtons.ButtonLoginPassword, myButtons.ButtonLoginPasswordDelete,
+		myButtons.ButtonLoginPasswordUpdate, myLabels.LabelAlertLoginPassword)
+	containerTblLoginPassword := layout.NewBorderLayout(myButtons.ButtonTopSynchronization, bottomContainer, nil, nil)
+	boxLoginPassword := container.New(containerTblLoginPassword, myButtons.ButtonTopSynchronization, myTabs.TblLoginPassword, bottomContainer)
 	return container.NewTabItem("Логин пароль", boxLoginPassword)
 }

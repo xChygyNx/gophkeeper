@@ -3,13 +3,15 @@ package tab
 import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
-	"fyne.io/fyne/v2/widget"
+
+	"github.com/xChygyNx/gophkeeper/internal/client/gui_elements"
 )
 
-func GetTabTexts(tblText *widget.Table, buttonSynchronization *widget.Button, textAdd *widget.Button, textDelete *widget.Button,
-	textUpdate *widget.Button, labelAlertText *widget.Label) *container.TabItem {
-	bottomContainer := container.New(layout.NewHBoxLayout(), textAdd, textDelete, textUpdate, labelAlertText)
-	containerTblText := layout.NewBorderLayout(buttonSynchronization, bottomContainer, nil, nil)
-	boxText := container.New(containerTblText, buttonSynchronization, tblText, bottomContainer)
+func GetTabTexts(myTabs *gui_elements.Tabs, myButtons *gui_elements.Buttons,
+	myLabels *gui_elements.Labels) *container.TabItem {
+	bottomContainer := container.New(layout.NewHBoxLayout(), myButtons.ButtonText, myButtons.ButtonTextDelete,
+		myButtons.ButtonTextUpdate, myLabels.LabelAlertText)
+	containerTblText := layout.NewBorderLayout(myButtons.ButtonTopSynchronization, bottomContainer, nil, nil)
+	boxText := container.New(containerTblText, myButtons.ButtonTopSynchronization, myTabs.TblText, bottomContainer)
 	return container.NewTabItem("Текстовые данные", boxText)
 }
