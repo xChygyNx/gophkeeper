@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:alpine
+    networks:
+      new:
+        aliases:
+          - database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gophkeeper
+    expose:
+      # publish port on docker network
+      - "5432"
+    ports:
+      # exposed to host (host:container)
+      - "5432:5432"
+    restart: always
+
+  migrate:
+      image: migrate/migrate
+      networks:
+        - new
+      volumes:
+        - .:/migrations
+      command:
+        [
+          "-path",
+          "/migrations",
+          "-database",
+          "postgres://postgres:password@localhost:5432/gophkeeper?sslmode=disable",
+          "up",
+          "4",
+        ]
+      links:
+        - db
+      depends_on:
+        - db
+networks:
+    new:
