@@ -2,10 +2,10 @@ package events
 
 import (
 	"context"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"github.com/sirupsen/logrus"
 	"github.com/xChygyNx/gophkeeper/internal/client/config"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 )
 
 type Event struct {

@@ -2,10 +2,9 @@ package model
 
 import (
 	"database/sql"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"github.com/golang/protobuf/ptypes/timestamp"
-
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 )
 
 type User struct {

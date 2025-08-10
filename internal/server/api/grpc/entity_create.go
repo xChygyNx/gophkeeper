@@ -4,12 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
 	"github.com/xChygyNx/gophkeeper/internal/server/model"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/errors"
 )
 

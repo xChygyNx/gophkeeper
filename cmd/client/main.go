@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"fyne.io/fyne/v2/app"
+	"github.com/xChygyNx/gophkeeper/internal/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -14,7 +15,6 @@ import (
 	"github.com/xChygyNx/gophkeeper/internal/client/api/events"
 	"github.com/xChygyNx/gophkeeper/internal/client/config"
 	"github.com/xChygyNx/gophkeeper/internal/client/gui"
-	gophkeeper "github.com/xChygyNx/gophkeeper/internal/server/proto"
 )
 
 // InterceptorLogger adapts logrus logger to interceptor logger.

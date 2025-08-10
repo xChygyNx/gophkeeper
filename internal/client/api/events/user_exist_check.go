@@ -2,7 +2,7 @@ package events
 
 import (
 	"fmt"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 )
 
 // UserExist - check if user exist in db

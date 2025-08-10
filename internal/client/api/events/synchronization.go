@@ -3,12 +3,12 @@ package events
 import (
 	"encoding/json"
 	"fmt"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/encryption"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/table"
 	"github.com/xChygyNx/gophkeeper/internal/client/storage/labels"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/service"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/vars"
 )

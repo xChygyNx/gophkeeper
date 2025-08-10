@@ -2,10 +2,10 @@ package grpchandler
 
 import (
 	"github.com/sirupsen/logrus"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"github.com/xChygyNx/gophkeeper/internal/server/config"
 	"github.com/xChygyNx/gophkeeper/internal/server/database"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/entity"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/file"

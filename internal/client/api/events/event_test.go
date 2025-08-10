@@ -3,6 +3,7 @@ package events
 import (
 	"context"
 	"crypto/rand"
+	grpcKeeper "github.com/xChygyNx/gophkeeper/internal/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -23,7 +24,6 @@ import (
 	grpchandler "github.com/xChygyNx/gophkeeper/internal/server/api/grpc"
 	serverConfig "github.com/xChygyNx/gophkeeper/internal/server/config"
 	"github.com/xChygyNx/gophkeeper/internal/server/database"
-	grpcKeeper "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/entity"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/file"

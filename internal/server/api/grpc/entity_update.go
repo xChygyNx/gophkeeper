@@ -3,11 +3,10 @@ package grpchandler
 import (
 	"context"
 	"fmt"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 )
 
 // EntityUpdate - checks the validity of the token and update record (text, bank card or login password)

@@ -3,12 +3,12 @@ package table
 import (
 	"encoding/json"
 	"fmt"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 	"strconv"
 	"time"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/consts"
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/service"
 )
 

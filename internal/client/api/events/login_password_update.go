@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
 	"github.com/xChygyNx/gophkeeper/internal/client/service/encryption"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/service"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/vars"
 )

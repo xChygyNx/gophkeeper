@@ -1,6 +1,7 @@
 package api
 
 import (
+	grpcGophkeeper "github.com/xChygyNx/gophkeeper/internal/proto"
 	"google.golang.org/grpc"
 	"net"
 	"net/http"
@@ -10,7 +11,6 @@ import (
 
 	grpcHandler "github.com/xChygyNx/gophkeeper/internal/server/api/grpc"
 	"github.com/xChygyNx/gophkeeper/internal/server/config"
-	grpcGophkeeper "github.com/xChygyNx/gophkeeper/internal/server/proto"
 )
 
 // StartGRPCService - starts the GRPC gophkeeper server

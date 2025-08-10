@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/xChygyNx/gophkeeper/internal/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/test/bufconn"
 	"net/http"
@@ -23,7 +24,6 @@ import (
 	grpcHandler "github.com/xChygyNx/gophkeeper/internal/server/api/grpc"
 	serverConfig "github.com/xChygyNx/gophkeeper/internal/server/config"
 	"github.com/xChygyNx/gophkeeper/internal/server/database"
-	grpcProto "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/entity"
 	"github.com/xChygyNx/gophkeeper/internal/server/storage/repositories/file"
@@ -110,7 +110,7 @@ func TestRest(t *testing.T) {
 	lis = bufconn.Listen(bufSize)
 	s := grpc.NewServer()
 	t.Run("registration gophkeeper-server", func(t *testing.T) {
-		grpcProto.RegisterGophkeeperServer(s, &handlerGrpc)
+		gophkeeper.RegisterGophkeeperServer(s, &handlerGrpc)
 		go api.StartRESTService(rs, serverCnfg, logger)
 
 		go func() {
@@ -121,20 +121,20 @@ func TestRest(t *testing.T) {
 		}()
 	})
 
-	var authenticatedUser *grpcProto.AuthenticationResponse
+	var authenticatedUser *gophkeeper.AuthenticationResponse
 	username := randomizer.RandStringRunes(10)
 	password, _ := encryption.HashPassword("Password-00")
 
 	t.Run("registration", func(t *testing.T) {
 		regisResp, err := handlerGrpc.Registration(context.Background(),
-			&grpcProto.RegistrationRequest{Username: username, Password: password})
+			&gophkeeper.RegistrationRequest{Username: username, Password: password})
 		fmt.Println(regisResp)
 		assert.NoError(t, err, "registration failed")
 	})
 
 	t.Run("authentication", func(t *testing.T) {
 		authenticatedUser, err = handlerGrpc.Authentication(context.Background(),
-			&grpcProto.AuthenticationRequest{Username: username, Password: password})
+			&gophkeeper.AuthenticationRequest{Username: username, Password: password})
 		assert.NoError(t, err, "authentication failed")
 	})
 

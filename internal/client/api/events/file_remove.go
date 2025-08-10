@@ -3,9 +3,9 @@ package events
 import (
 	"context"
 	"fmt"
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 
 	"github.com/xChygyNx/gophkeeper/internal/client/model"
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/service"
 )
 

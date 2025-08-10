@@ -1,9 +1,9 @@
 package model
 
 import (
+	grpc "github.com/xChygyNx/gophkeeper/internal/proto"
 	"time"
 
-	grpc "github.com/xChygyNx/gophkeeper/internal/server/proto"
 	"github.com/xChygyNx/gophkeeper/internal/server/service"
 )
 
